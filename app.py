@@ -26,8 +26,8 @@ def recommend(movie, movies, similarity):
 st.header('Movie Recommender System Using Machine Learning')
 
 # Dodaj uploader dla pliku movie_list.pkl
-movie_list_file = st.file_uploader("https://github.com/ZbiegMichal/movie_recommendation/blob/main/movie_list.pkl", type="pkl")
-
+# movie_list_file = st.file_uploader("https://github.com/ZbiegMichal/movie_recommendation/blob/main/movie_list.pkl", type="pkl")
+movie_list_file = pickle.load(open("https://github.com/ZbiegMichal/movie_recommendation/blob/main/movie_list.pkl", "rb"))
 # Dodaj uploader dla pliku similarity.pkl
 similarity_file = st.file_uploader("Upload similarity.pkl", type="pkl")
 
