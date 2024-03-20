@@ -26,27 +26,14 @@ def recommend(movie, movies, similarity):
 st.header('Movie Recommender System Using Machine Learning')
 
 # Dodaj uploader dla pliku movie_list.pkl
-# movies = pickle.load(open(r'artificats\movie_list.pkl','rb'))
+movie_list_file = st.file_uploader("Upload movie_list.pkl", type="pkl")
 
 # Dodaj uploader dla pliku similarity.pkl
 similarity_file = st.file_uploader("Upload similarity.pkl", type="pkl")
-# Adres URL pliku w repozytorium Git
-GIT_RAW_URL = "https://raw.githubusercontent.com/ZbiegMichal/movie_recomendation/main/path/to/movie_list.pkl"
 
-# Pobierz plik za pomocą adresu URL
-response = requests.get(GIT_RAW_URL)
-
-# Sprawdź, czy pobranie pliku zakończyło się sukcesem
-if response.status_code == 200:
-    # Wczytaj plik pkl
-    movies = pickle.loads(response.content)
-    # Wykorzystaj wczytane dane
-    st.write(movies)
-else:
-    st.error(f"Failed to fetch the file. Status code: {response.status_code}")
 if movie_list_file is not None and similarity_file is not None:
     # Wczytaj pliki pkl
-    # movies = pickle.load(movie_list_file)
+    movies = pickle.load(movie_list_file)
     similarity = pickle.load(similarity_file)
 
     movie_list = movies['title'].values
