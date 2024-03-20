@@ -46,7 +46,7 @@ else:
     st.error(f"Failed to fetch the file. Status code: {response.status_code}")
 if movie_list_file is not None and similarity_file is not None:
     # Wczytaj pliki pkl
-    movies = pickle.load(movie_list_file)
+    # movies = pickle.load(movie_list_file)
     similarity = pickle.load(similarity_file)
 
     movie_list = movies['title'].values
