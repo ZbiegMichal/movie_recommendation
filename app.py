@@ -26,7 +26,7 @@ def recommend(movie, movies, similarity):
 st.header('Movie Recommender System Using Machine Learning')
 
 # Dodaj uploader dla pliku movie_list.pkl
-movies = pickle.load(open(r'artificats\movie_list.pkl','rb'))
+# movies = pickle.load(open(r'artificats\movie_list.pkl','rb'))
 
 # Dodaj uploader dla pliku similarity.pkl
 similarity_file = st.file_uploader("Upload similarity.pkl", type="pkl")
