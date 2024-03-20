@@ -1,6 +1,7 @@
 import pickle
 import streamlit as st
 import requests
+from io import BytesIO
 
 def fetch_poster(movie_id):
     url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(movie_id)
@@ -25,17 +26,27 @@ def recommend(movie, movies, similarity):
 
 st.header('Movie Recommender System Using Machine Learning')
 
-# Dodaj uploader dla pliku movie_list.pkl
-movie_list_file = st.file_uploader("Upload movie_list.pkl", type="pkl")
+# URL do pliku movie_list.pkl na GitHubie
+url_movie_list = 'https://raw.githubusercontent.com/nazwa_uzytkownika/nazwa_repozytorium/sciezka/do/movie_list.pkl'
 
-# Dodaj uploader dla pliku similarity.pkl
-similarity_file = st.file_uploader("Upload similarity.pkl", type="pkl")
+# URL do pliku similarity.pkl na GitHubie
+url_similarity = 'https://raw.githubusercontent.com/nazwa_uzytkownika/nazwa_repozytorium/sciezka/do/similarity.pkl'
 
-if movie_list_file is not None and similarity_file is not None:
-    # Wczytaj pliki pkl
-    movies = pickle.load(movie_list_file)
-    similarity = pickle.load(similarity_file)
+# Wczytaj plik movie_list.pkl
+movie_list_response = requests.get(url_movie_list)
+if movie_list_response.status_code == 200:
+    movies = pickle.load(BytesIO(movie_list_response.content))
+else:
+    st.error(f"Failed to load movie_list.pkl: {movie_list_response.status_code}")
 
+# Wczytaj plik similarity.pkl
+similarity_response = requests.get(url_similarity)
+if similarity_response.status_code == 200:
+    similarity = pickle.load(BytesIO(similarity_response.content))
+else:
+    st.error(f"Failed to load similarity.pkl: {similarity_response.status_code}")
+
+if 'movies' in locals() and 'similarity' in locals():
     movie_list = movies['title'].values
     selected_movie = st.selectbox(
         "Type or select a movie from the dropdown",
