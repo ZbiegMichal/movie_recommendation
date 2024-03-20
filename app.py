@@ -27,7 +27,7 @@ def recommend(movie, movies, similarity):
 st.header('Movie Recommender System Using Machine Learning')
 
 # URL do pliku movie_list.pkl na GitHubie
-url_movie_list = 'https://raw.githubusercontent.com/ZbiegMichal/movie_recommendation/movie_list.pkl'
+url_movie_list = 'https://github.com/ZbiegMichal/movie_recommendation/blob/main/movie_list.pkl'
 
 # URL do pliku similarity.pkl na GitHubie
 url_similarity = 'https://raw.githubusercontent.com/nazwa_uzytkownika/nazwa_repozytorium/sciezka/do/similarity.pkl'
